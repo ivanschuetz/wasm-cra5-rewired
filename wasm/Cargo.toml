@@ -1,0 +1,17 @@
+[package]
+name = "wasm"
+version = "0.1.0"
+authors = ["Ivan Schuetz <ivanhp978@gmail.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/lib.rs"
+
+[dependencies]
+wasm-bindgen = { version = "0.2.80", features = ["serde-serialize"]  }
+
+wasm-bindgen-futures = "0.4.24"
+wasm-logger = "0.2"
+log = "0.4"
+web-sys = { version = "0.3.57", features = ["Storage", "Window"]}

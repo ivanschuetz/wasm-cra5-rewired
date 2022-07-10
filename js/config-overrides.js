@@ -7,19 +7,16 @@ module.exports = function override(config, env) {
 
   config.module.rules.forEach((rule) => {
     (rule.oneOf || []).forEach((oneOf) => {
-      if (oneOf.loader && oneOf.loader.indexOf("file-loader") >= 0) {
+      if (oneOf.type === "asset/resource") {
         // make file-loader ignore WASM files
         oneOf.exclude.push(wasmExtensionRegExp);
       }
     });
   });
 
-  // add a dedicated loader for WASM
-  config.module.rules.push({
-    test: wasmExtensionRegExp,
-    include: path.resolve(__dirname, "src"),
-    use: [{ loader: require.resolve("wasm-loader"), options: {} }],
-  });
+  config.experiments = {
+    asyncWebAssembly: true,
+  };
 
   return config;
 };

@@ -1,13 +1,12 @@
 import "./App.css";
 
-const wasmPromise = import("wasm");
+import { hello } from './pkg'
 
 function App() {
   return (
     <div className="App">
       <button
         onClick={async () => {
-          const { hello } = await wasmPromise;
           const res = await hello();
           console.log("wasm said: " + res);
         }}
